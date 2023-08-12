@@ -198,16 +198,16 @@ SELECT
    COUNT(*) OVER() as total,
    CASE when country IN ('India', 'USA' ) THEN country ELSE 'Other' END AS country_new
 FROM
-    activity
+     activity
 WHERE
-     event_name = 'app-purchase'
+      event_name = 'app-purchase'
 )
 
 SELECT
   country_new,
   ROUND((COUNT(*)/MAX(total))*100,2) as pct
 FROM
-    cte
+     cte
 GROUP BY
         country_new
 ```
