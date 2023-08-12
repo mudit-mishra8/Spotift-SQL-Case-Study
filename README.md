@@ -193,21 +193,21 @@ On the 3rd of January, 2 users both installed the app and made a purchase. On th
 ### Question 6: What percentage of users made a purchase in India, USA, and other countries?
 
 ```sql
-with cte as
+WITH cte AS
 (
-select
+SELECT
    *,
-   count(*) over() as total,
-   case when country in ('India', 'USA' )then country else 'Other' end as country_new
-from activity
-where event_name = 'app-purchase'
+   COUNT(*) OVER() as total,
+   CASE when country IN ('India', 'USA' ) THEN country ELSE 'Other' END AS country_new
+FROM activity
+WHERE event_name = 'app-purchase'
 )
 
-select
+SELECT
   country_new,
   round((count(*)/max(total))*100,2) as pct
-from cte
-group by country_new
+FROM cte
+GROUP BY country_new
 ```
 
 **Expected Output:**
